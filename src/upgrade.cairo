@@ -8,18 +8,15 @@ mod upgrade {
 
     #[storage]
     struct Storage {
-        owner: ContractAddress,
         value: u128,
     }
 
     #[constructor]
-    fn constructor(ref self: ContractState, _owner: ContractAddress,) {
-        self.owner.write(_owner);
+    fn constructor(ref self: ContractState,) {
     }
 
     #[external(v0)]
     fn upgrade_class(ref self: ContractState, new_class_hash: ClassHash) -> bool {
-        assert(self.owner.read() == get_caller_address(), 'Owner required');
         replace_class_syscall(new_class_hash);
         true
     }
