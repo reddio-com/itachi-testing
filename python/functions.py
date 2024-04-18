@@ -231,7 +231,7 @@ class Itachi(object):
     def deploy_contract(self, address, key, class_file="data/cool_sierra_contract_class.json", casm_file="data/cool_compiled_class.casm"):
         declare_result = self.declare_class(address, key, class_file, casm_file)
 
-        deploy_result = declare_result.deploy_sync(
+        deploy_result = declare_result.deploy_v1_sync(
             max_fee=int(1e16)
         )
         time.sleep(10)
@@ -240,7 +240,7 @@ class Itachi(object):
 
         contract = deploy_result.deployed_contract
         print("contract address", hex(contract.address))
-        return hex(declare_result.class_hash), hex(contract.address)
+        return hex(declare_result.class_hash), hex(contract.address), contract
     
     def test_transfer_eth(self):
         amount = 5000*10**18
