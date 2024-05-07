@@ -104,7 +104,6 @@ class Itachi(object):
         receipt_status = self._client.get_transaction_status_sync(tx_hash)
         status = receipt_status.finality_status
         while status != TransactionStatus.ACCEPTED_ON_L2:
-            time.sleep(0.5)
             receipt_status = self._client.get_transaction_status_sync(tx_hash)
             status = receipt_status.finality_status
 
